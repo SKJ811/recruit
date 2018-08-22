@@ -22,8 +22,9 @@ public class JobTests {
 	public void getJob() {
 		List<Job> list=new ArrayList<Job>();
 		Job job=new Job();
-		job.setKeycode("行业");
-		list =jobBiz.getJob(job);
+		//job.setKeycode("行业");
+		job.setFathernode(1);
+		list =jobBiz.getAllJob();
 		System.out.println(list);
 	}
 

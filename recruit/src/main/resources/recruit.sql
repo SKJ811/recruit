@@ -32,7 +32,7 @@ CREATE TABLE `applyinfo`  (
 -- Table structure for dd     行业数据字典 
 -- ----------------------------
 DROP TABLE IF EXISTS `job`;
-CREATE TABLE `dd`  (
+CREATE TABLE `job`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `keycode` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '对外键',
   `parameter` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '值',
