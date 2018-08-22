@@ -31,7 +31,7 @@ CREATE TABLE `applyinfo`  (
 -- ----------------------------
 -- Table structure for dd     行业数据字典 
 -- ----------------------------
-DROP TABLE IF EXISTS `dd`;
+DROP TABLE IF EXISTS `job`;
 CREATE TABLE `dd`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `keycode` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '对外键',
@@ -39,6 +39,10 @@ CREATE TABLE `dd`  (
   `fathernode` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+select *  from dd
+
+select *     from job    WHERE keycode like '%行业%'
+
 
 -- ----------------------------
 -- Table structure for merchant_baseinfo     商家信息
