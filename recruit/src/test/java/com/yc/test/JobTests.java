@@ -27,5 +27,13 @@ public class JobTests {
 		list =jobBiz.getAllJob();
 		System.out.println(list);
 	}
+	@Test //查找
+	public void getJobBack() {
+		List<Job> list=new ArrayList<Job>();
+		Job job=new Job();
+		job.setId(10);
+		list =jobBiz.getJobBack(job);
+		System.out.println(list);
+	}
 
 }

@@ -4,87 +4,110 @@ import java.util.List;
 import java.util.Map;
 
 public interface BaseDao<T> {
-	
+
 	/**
-	 * @param t   要保存的数据对象
-	 * @param sqlId    mapper 中的方法名
-	 * 					"com.yc.bean.+类名+mapper.",sqlId
+	 * 增加对象
+	 * @param t  ：要保存的数据对象
+	 * @param clazz  对象的反射实例，用于确认mapper文件的位置
+	 * @param sqlId   mapper 中的方法名
+	 * @param list   要保存的对象列表
+	 * @param parameterMap  要保存对象的参数
 	 */
-	public void save (T t,String sqlId);
+	public int save(T t, String sqlId);
 	
-	/**
-	 * 
-	 * @param cls
-	 * @param sqlId
-	 * @param parameterMap   参数
-	 */
-	public void save (Class<T> cls,String sqlId,Map<String,Object> parameterMap);
-	/**
-	 * @param cls
-	 * @param sqlId
-	 * @param list   批量
-	 */
-	public void save (Class<T> cls,String sqlId,List<T> list);
+	public int save(Class<T> clazz, String sqlId, Map<String, Object> parameterMap);
 	
+	public int save(Class<T> clazz,String sqlId,List<T> list);
+
 	/**
 	 * 更新对象
 	 * @param t  带有参数的待更新对象
-	 * @param sqlId   mapper 中的方法名
-	 * 					"com.yc.bean.+类名+mapper.",sqlId
+	 * @param clazz  对象的反射实例，用于确认mapper文件的位置
+	 * @param sqlId  mapper 中的方法名
+	 * @param list   要更新的对象列表
+	 * @param parameterMap  要更新对象的参数
 	 */
-	public void update(T t, String sqlId);
-	public void update(Class<T> cls, String sqlId);
-	public void update (Class<T> cls,String sqlId,Map<String,Object> parameterMap);
-	public void update (Class<T> cls,String sqlId,List<T> list);
+	public int update(T t, String sqlId);
 	
-	public void del(T t, String sqlId);
-	public void del(Class<T> cls, String sqlId);
-	public void del (Class<T> cls,String sqlId,Map<String,Object> parameterMap);
-	public void del (Class<T> cls,String sqlId,List<Object> list);
+	public int update(Class<T> clazz,String sqlId);
 	
-	public List<T> findAll(T t, String sqlId);
-	public List<T> findAll(Class<T> cls, String sqlId);
-	public List<T> findAll (Class<T> cls,String sqlId,Map<String,Object> parameterMap);
+	// 根据条件更新
+	public int update(Class<T> clazz, String sqlId, Map<String, Object> parameterMap);
 	
-	public T findOne (T t,String sqlId);
-	public T findOne (Class<T> cls,String sqlId,Map<String,Object> parameterMap);
-	public T findOne (Class<T> cls,String sqlId);
+	public int update(Class<T> clazz,String sqlId,List<T> list);
 	
 	/**
-	 * 分页查询
-	 * @param cls 用于确定mapper位置
-	 * @param map  参数 键为字段名  值为参数值
-	 * @param sqlId   mapper中方法名
-	 * @param offset   从第几条开始
-	 * @param sizePage  每页几条
+	 * 删除对象
+	 * @param t  带有参数的待删除对象
+	 * @param clazz  对象的反射实例，用于确认mapper文件的位置
+	 * @param id   要删除对象的id
+	 * @param ids   要删除对象的id列表 
+	 * @param sqlId  mapper 中的方法名
+	 * @param parameterMap  要删除对象的参数
+	 */
+	public int del(T t,String sqlId);
+	
+	public int del(Class<T> clazz, String id,String sqlId);
+	
+	public int del(Class<T> clazz, List<Integer> ids,String sqlId);
+	
+	// 根据条件删除
+	public int del(Class<T> clazz,String sqlId,Map<String,Object> parameterMap);
+	
+	/**
+	 * 查集合，没有条件属性
+	 * @param t  带有参数的待查询对象
+	 * @param clazz   对象的反射实例，用于确认mapper文件的位置
+	 * @param sqlId  mapper中的方法名
+	 * @return 集合
+	 */
+	public List<T> findAll(Class<T> clazz,String sqlId);
+	
+	public List<T> findAll(T t,String sqlId);
+	
+	//查集合，条件查询   parameterMap  要查询的条件
+	public List<T> findAll(Class<T> clazz,String sqlId,Map<String,Object> parameterMap);
+	
+	
+	/**
+	 * 查对象
+	 * @param t  带有参数的待查询对象
+	 * @param clazz   对象的反射实例，用于确认mapper文件的位置
+	 * @param sqlId  mapper中的方法名
+	 * @return 对象
+	 */
+	public T findOne(Class<T> clazz,String sqlId);
+	
+	public T findOne(T t,String sqlId);
+	
+	// 根据条件查询
+	public T findOne(Class<T> clazz,String sqlId,Map<String,Object> parameterMap);
+	
+	
+	/**
+	 * 数量查询
+	 * @param t  带有参数的待查询对象
+	 * @param clazz  用于确认mapper文件的位置
+	 * @param sqlId  mapper中的方法名
 	 * @return
 	 */
-	public List<T> findList(Class<T> cls, String sqlId,Map<String,Object> map,int offset,int sizePage);
+	public int getCount(Class<T> clazz,String sqlId);
+	
+	public int getCount(T t ,String sqlId);
+	
+	// 根据条件聚合查询
+	public int getCount(Class<T> clazz,Map<String,Object> map,String sqlId);
+	
 	/**
 	 * 聚合查询
-	 * @param cls
-	 * @param sqlId
+	 * @param t  带有参数的待查询对象
+	 * @param clazz  用于确认mapper文件的位置
+	 * @param sqlId  mapper中的方法名
 	 * @return
 	 */
-	public int getCount(Class<T> cls,String sqlId);
+	public double getFunc(Class<T> clazz,String sqlId);
 	
-	/**
-	 *  聚合查询
-	 * @param cls
-	 * @param map
-	 * @param sqlId
-	 * @return
-	 */
-	public int getCount(Class<T> cls,Map<String,Object> map,String sqlId);
-	public int getCount( T t,String sqlId);
+	public double getFunc(T t,String sqlId);
 	
-	/**
-	 * 聚合查询
-	 * @param cls
-	 * @param sqlId
-	 * @return
-	 */
-	public double getFunc(Class<T> cls,String sqlId);
-	public double getFunc( T t,String sqlId);
-	public double getFunc(Class<T> cls,String sqlId,Map<String,Object> parameterMap);
+	public double getFunc(Class<T> clazz,String sqlId,Map<String,Object> map);
 }

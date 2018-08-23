@@ -17,19 +17,24 @@ import com.yc.biz.impl.JobBizImpl;
 public class InitListener implements ServletContextListener {
 	private ApplicationContext ac;
 
-
 	public void contextDestroyed(ServletContextEvent arg0) {
 	}
 
 	public void contextInitialized(ServletContextEvent sce) {
-		ServletContext application=sce.getServletContext();
-		ac=WebApplicationContextUtils.getWebApplicationContext(application);
-		JobBizImpl  jobBizImpl=(JobBizImpl) ac.getBean("jobBizImpl");
-		//查出所有的行业 
-		Job   job=new Job();
-		List<Job>   industryList=jobBizImpl.getJob(job);
-		application.setAttribute("industryList", industryList); 
-		System.out.println(industryList);
+		ServletContext application = sce.getServletContext();
+		ac = WebApplicationContextUtils.getWebApplicationContext(application);
+		JobBizImpl jobBizImpl = (JobBizImpl) ac.getBean("jobBizImpl");
+		// 查出所有的行业
+		List<Job> industryList;
+		try {
+			industryList = jobBizImpl.getAllJob();
+			application.setAttribute("industryList", industryList);
+			System.out.println(industryList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(0);
+		}
+
 	}
 
 }

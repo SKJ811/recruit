@@ -42,8 +42,10 @@ CREATE TABLE `job`  (
 select *  from dd
 
 select *     from job    WHERE keycode like '%行业%'
-
-
+	
+select * from job where fathernode in(
+	select  fathernode from job where id=10
+)
 -- ----------------------------
 -- Table structure for merchant_baseinfo     商家信息
 -- ----------------------------
