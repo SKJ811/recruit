@@ -124,7 +124,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
 	@Override
 	public int getCount(T t, String sqlId) {
-		return sqlSession.selectOne(mapperPath + t.getClass().getSimpleName() + "Mapper." + sqlId);
+		return sqlSession.selectOne(mapperPath + t.getClass().getSimpleName() + "Mapper." + sqlId,t);
 	}
 
 	@Override

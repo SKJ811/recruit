@@ -22,10 +22,11 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `applyinfo`;
 CREATE TABLE `applyinfo`  (
-  `student_id` int NOT NULL,
-  `merchant_id` int NOT NULL,
-  `job` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`student_id`, `merchant_id`) USING BTREE
+  `id` int NOT NULL,
+  `stu_id` int NOT NULL,
+  `merchant_wantedjob_id` int NOT NULL,
+  `status` int NOT NULL  DEFAULT 1,
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
@@ -60,19 +61,22 @@ CREATE TABLE `merchant_baseinfo`  (
   `merchant_idcard` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '店主身份证',
   PRIMARY KEY (`merchant_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
+select * from merchant_wantedjob
 -- ----------------------------
 -- Table structure for merchant_wantedjob     商家发布的兼职信息
 -- ----------------------------
-DROP TABLE IF EXISTS `merchant_wantedjob`;    
+DROP TABLE IF EXISTS `merchant_wantedjob`;
 CREATE TABLE `merchant_wantedjob`  (
   `merchant_id` int NOT NULL,
   `salary` decimal(10, 2) NULL DEFAULT NULL,
-  `job` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `job_id` int NULL DEFAULT NULL,
   `worktime` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `workplace` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `workdescp` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`merchant_id`) USING BTREE,
+  `workcleanform` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `merchant_wantedjob_id` int NOT NULL,
+  PRIMARY KEY (`merchant_wantedjob_id`) USING BTREE,
+  INDEX `merchant_id`(`merchant_id`) USING BTREE,
   CONSTRAINT `merchant_wantedjob_ibfk_1` FOREIGN KEY (`merchant_id`) REFERENCES `merchant_baseinfo` (`merchant_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
@@ -80,7 +84,7 @@ CREATE TABLE `merchant_wantedjob`  (
 -- Table structure for student_baseinfo      学生基本信息
 -- ----------------------------
 DROP TABLE IF EXISTS `student_baseinfo`;
-CREATE TABLE `student_baseinfo`  (
+CREATE TABLE `student_baseinfo`  ( 
   `stu_id` int NOT NULL AUTO_INCREMENT COMMENT '兼职学生id',
   `stu_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '兼职学生姓名',
   `stu_username` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '兼职学生用户名',

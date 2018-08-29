@@ -6,6 +6,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -21,6 +22,8 @@ public class InitListener implements ServletContextListener {
 	}
 
 	public void contextInitialized(ServletContextEvent sce) {
+    	Logger logger=Logger.getLogger(InitListener.class);
+
 		ServletContext application = sce.getServletContext();
 		ac = WebApplicationContextUtils.getWebApplicationContext(application);
 		JobBizImpl jobBizImpl = (JobBizImpl) ac.getBean("jobBizImpl");
@@ -29,9 +32,11 @@ public class InitListener implements ServletContextListener {
 		try {
 			industryList = jobBizImpl.getAllJob();
 			application.setAttribute("industryList", industryList);
-			System.out.println(industryList);
+			logger.info(industryList);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error("系统初始化错误，详细信息如下：",e);
+			logger.error("系统退出，请检查再次部署。。。。。");
 			System.exit(0);
 		}
 
