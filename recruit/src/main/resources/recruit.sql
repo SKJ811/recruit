@@ -22,7 +22,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `applyinfo`;
 CREATE TABLE `applyinfo`  (
-  `id` int NOT NULL,
+  `id` int NOT NULL  AUTO_INCREMENT,
   `stu_id` int NOT NULL,
   `merchant_wantedjob_id` int NOT NULL,
   `status` int NOT NULL  DEFAULT 1,
