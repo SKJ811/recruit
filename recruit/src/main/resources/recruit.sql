@@ -28,7 +28,7 @@ CREATE TABLE `applyinfo`  (
   `status` int NOT NULL  DEFAULT 1,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
+select * from applyinfo
 -- ----------------------------
 -- Table structure for dd     行业数据字典 
 -- ----------------------------
@@ -52,15 +52,18 @@ select * from job where fathernode in(
 -- ----------------------------
 DROP TABLE IF EXISTS `merchant_baseinfo`;
 CREATE TABLE `merchant_baseinfo`  (
-  `merchant_id` int NOT NULL AUTO_INCREMENT COMMENT '商家id',
-  `merchant_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商家名',
+  `merchant_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商家id',
+  `merchant_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商家名',
   `merchant_username` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商家登陆用户名',
-  `merchant_password` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商家登陆密码',
+  `merchant_password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商家登陆密码',
   `merchant_telephone` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商家电话',
   `merchant_license` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '营业执照码',
   `merchant_idcard` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '店主身份证',
+  `merchant_hostname` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '店主名',
+  `merchant_email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商家邮箱',
+  `power` int(11) NULL DEFAULT 1 COMMENT '权限',
   PRIMARY KEY (`merchant_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 select * from merchant_wantedjob
 -- ----------------------------
 -- Table structure for merchant_wantedjob     商家发布的兼职信息

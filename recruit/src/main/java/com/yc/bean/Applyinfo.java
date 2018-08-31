@@ -9,8 +9,11 @@ public class Applyinfo implements Serializable {
 	
 	private Integer id;
 	private Integer status;
+	private Integer stu_id;
+	private Integer merchant_wantedjob_id;
 	private Student_baseinfo student_baseinfo;
 	private Merchant_wantedjob merchant_wantedjob;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -35,11 +38,28 @@ public class Applyinfo implements Serializable {
 	public void setMerchant_wantedjob(Merchant_wantedjob merchant_wantedjob) {
 		this.merchant_wantedjob = merchant_wantedjob;
 	}
+	public Integer getStu_id() {
+		return stu_id;
+	}
+	public void setStu_id(Integer stu_id) {
+		this.stu_id = stu_id;
+	}
+	public Integer getMerchant_wantedjob_id() {
+		return merchant_wantedjob_id;
+	}
+	public void setMerchant_wantedjob_id(Integer merchant_wantedjob_id) {
+		this.merchant_wantedjob_id = merchant_wantedjob_id;
+	}
 	@Override
 	public String toString() {
-		return "Askfor_info [id=" + id + ", status=" + status
+		return "Applyinfo [id=" + id + ", status=" + status + ", stu_id="
+				+ stu_id + ", merchant_wantedjob_id=" + merchant_wantedjob_id
 				+ ", student_baseinfo=" + student_baseinfo
 				+ ", merchant_wantedjob=" + merchant_wantedjob + "]";
 	}
+
+
+	
+	
 	
 }
